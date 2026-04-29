@@ -59,7 +59,7 @@ formsproject/
 
 ![Dashboard](https://github.com/user-attachments/assets/170ba06f-eb4c-45e5-bc2d-c33b1b4c96ab)
 
-### Login Page
+### Image Upload Page
 
 ![Login](https://github.com/user-attachments/assets/9cccbce9-2e62-4aac-b561-8156bf90d4bb)
 
