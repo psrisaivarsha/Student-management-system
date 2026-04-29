@@ -1,0 +1,152 @@
+{% extends 'myapp/base.html' %}
+{% load widget_tweaks %}
+
+{% block contentblock %}
+
+<style>
+    /* 🎨 EXACT COLORS FROM TAILWIND */
+    body {
+        background-color: #f8fafc;
+    }
+
+    .sidebar {
+        background-color: #0f172a;
+        color: #cbd5f5;
+        min-height: 100vh;
+    }
+
+    .sidebar a {
+        color: #cbd5f5;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .sidebar a:hover {
+        background-color: #1e293b;
+    }
+
+    .active-link {
+        background-color: #2563eb;
+        color: white !important;
+    }
+
+    .form-card {
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .form-control {
+        background-color: #f1f5f9;
+        border: none;
+        border-radius: 8px;
+    }
+
+    .form-control:focus {
+        border: 2px solid #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-primary {
+        background-color: #2563eb;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #1d4ed8;
+    }
+
+    .title-icon {
+        color: #2563eb;
+        font-size: 28px;
+    }
+</style>
+
+<div class="d-flex">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar p-3" style="width:250px;">
+        <h5 class="text-white mb-4">Student Portal</h5>
+
+       <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'students' %}" class="active-link">Students</a>
+        
+        <a href="{% url 'register' %}">Add Student</a>
+
+        <hr class="text-secondary">
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-danger w-100">Logout</button>
+        </form>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container p-5">
+
+        <!-- HEADER -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex align-items-center gap-2">
+                <span class="title-icon">➕</span>
+                <h3 class="fw-bold">Add New Student</h3>
+            </div>
+
+            <a href="{% url 'students' %}" class="btn btn-outline-dark">
+                ← Back
+            </a>
+        </div>
+
+        <!-- FORM -->
+        <div class="card form-card p-4">
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label>Student ID</label>
+                        {{ form.stuId|add_class:"form-control" }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Name</label>
+                        {{ form.stuName|add_class:"form-control" }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Marks</label>
+                        {{ form.stuMarks|add_class:"form-control" }}
+                    </div>
+
+                    
+
+                    <div class="col-md-12 mb-3">
+                        <label>Photo</label>
+                        {{ form.photo|add_class:"form-control" }}
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary px-5 py-2">
+                        Add Student
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

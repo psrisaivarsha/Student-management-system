@@ -1,0 +1,127 @@
+{% extends 'myapp/base.html' %}
+{% block contentblock %}
+
+<style>
+body {
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.login-left {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-right {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.form-control {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #ccc;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 0 2px #7c3aed;
+    color: white;
+}
+
+.btn-custom {
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.btn-custom:hover {
+    transform: scale(1.03);
+}
+
+.brand {
+    font-weight: bold;
+    color: #a78bfa;
+}
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- LEFT -->
+        <div class="col-md-6 login-left">
+            <div class="glass p-5 text-white" style="width:100%; max-width:400px;">
+
+                <h4 class="brand mb-4">StudentPortal</h4>
+
+                <h2 class="mb-2">Welcome Back 👋</h2>
+                <p class="text-muted mb-4">Login to continue</p>
+
+                <!-- ERROR -->
+                {% if error %}
+                <div class="alert alert-danger text-center">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <!-- ✅ FIXED FORM -->
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-custom w-100 text-white py-2">
+                        Login
+                    </button>
+                </form>
+
+                <p class="mt-4 text-center text-muted small">
+                    Don't have an account?
+                   <a href="{% url 'signup' %}" class="text-info">Sign up</a>
+                </p>
+
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-md-6 login-right d-none d-md-flex">
+            <div class="text-center px-4">
+                <h1 class="fw-bold mb-4">Welcome to Student Portal 🎓</h1>
+                <p class="opacity-75">
+                    Track results, manage students, and stay organized with ease.
+                </p>
+
+                <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+                     class="img-fluid mt-4" width="200">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

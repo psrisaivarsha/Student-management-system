@@ -1,0 +1,85 @@
+{% extends 'myapp/base.html' %}
+{% block contentblock %}
+
+<style>
+body {
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.login-box {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-control {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #ccc;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 0 2px #7c3aed;
+    color: white;
+}
+
+.btn-custom {
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    border: none;
+}
+</style>
+
+<div class="container login-box">
+
+    <div class="glass p-5 text-white" style="width:100%; max-width:400px;">
+
+        <h3 class="text-center mb-3">Login</h3>
+
+        <!-- ERROR MESSAGE -->
+        {% if error %}
+        <div class="alert alert-danger text-center">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- FORM -->
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Username" required>
+            </div>
+
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="btn btn-custom w-100 text-white">
+                Login
+            </button>
+        </form>
+
+        <!-- SIGNUP LINK -->
+        <p class="text-center mt-3">
+            Don't have an account?
+            <a href="{% url 'signup' %}" class="text-info">Signup</a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

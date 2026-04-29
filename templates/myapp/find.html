@@ -1,0 +1,157 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block contentblock %}
+
+<style>
+    /* 🎨 DARK THEME (same as Tailwind) */
+    body {
+        background-color: #0f172a;
+        color: #e2e8f0;
+    }
+
+    .profile-card {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        overflow: hidden;
+    }
+
+    .profile-header {
+        background-color: #d5dbe7;
+        padding: 20px;
+        text-align: center;
+        color: rgb(12, 12, 12);
+        font-weight: bold;
+        font-size: 22px;
+    }
+
+    .profile-body {
+        padding: 25px;
+    }
+
+    .profile-label {
+        font-size: 12px;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .profile-value {
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+    }
+
+    .profile-img {
+        width: 130px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid #475569;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .profile-footer {
+        background-color: rgba(15, 23, 42, 0.6);
+        padding: 15px;
+        border-top: 1px solid #334155;
+    }
+
+    .btn-dark-outline {
+        border: 2px solid #475569;
+        color: #cbd5f5;
+        font-weight: 600;
+    }
+
+    .btn-dark-outline:hover {
+        background-color: #334155;
+    }
+
+    .btn-primary-custom {
+        background-color: #d5dbe7;
+        border: none;
+        font-weight: 600;
+        color: black;
+    }
+
+    .btn-primary-custom:hover {
+        background-color: #1d4ed8;
+    }
+</style>
+
+<div class="container mt-5">
+
+    <!-- TITLE -->
+    <h2 class="text-center text-white mb-4">Search Page</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="profile-card">
+
+                <!-- HEADER -->
+                <div class="profile-header">
+                    {{ student.stuName }} Info
+                </div>
+
+                <!-- BODY -->
+                <div class="profile-body">
+
+                    <div class="row align-items-center">
+
+                        <!-- IMAGE -->
+                        <div class="col-md-4 text-center mb-3">
+                            {% if student.photo %}
+                                <img src="{{ student.photo.url }}" class="profile-img">
+                            {% else %}
+                                <img src="{% static 'images/default.png' %}" class="profile-img">
+                            {% endif %}
+                        </div>
+
+                        <!-- DETAILS -->
+                        <div class="col-md-8">
+
+                            <div class="mb-3">
+                                <div class="profile-label">Student ID</div>
+                                <div class="profile-value">{{ student.stuId }}</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="profile-label">Full Name</div>
+                                <div class="profile-value">{{ student.stuName }}</div>
+                            </div>
+
+                            <div>
+                                <div class="profile-label">Academic Marks</div>
+                                <div class="profile-value">{{ student.stuMarks }}%</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="profile-footer d-flex gap-2">
+
+                    <a href="/students" class="btn btn-dark-outline w-50">
+                        Back
+                    </a>
+
+                    <a href="/edit/{{student.id}}/" class="btn btn-primary-custom w-50">
+                        Edit
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

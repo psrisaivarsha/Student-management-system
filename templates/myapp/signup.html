@@ -1,0 +1,150 @@
+{% extends 'myapp/base.html' %}
+{% block contentblock %}
+
+<style>
+body {
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
+    color: white;
+}
+
+/* Left side */
+.signup-left {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Right side */
+.signup-right {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Glass card */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Inputs */
+.form-control {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #ccc;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 0 2px #7c3aed;
+    color: white;
+}
+
+/* Button */
+.btn-custom {
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-custom:hover {
+    transform: scale(1.03);
+}
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- LEFT SIDE -->
+        <div class="col-md-6 signup-left">
+
+            <div class="glass p-5" style="width:100%; max-width:450px;">
+
+                <h2 class="mb-2">Join the future 🚀</h2>
+                <p class="text-muted mb-4">
+                    Create your academic account
+                </p>
+
+                <!-- ERROR -->
+                {% if error %}
+                <div class="alert alert-danger text-center">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <!-- FORM -->
+                <form method="POST" action="{% url 'signup' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label>Full Name</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Enter email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                    </div>
+
+                    <!-- ROLE -->
+                    <div class="mb-3">
+                        <label>Select Role</label>
+                        <select name="role" class="form-control">
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-custom w-100 text-white py-2">
+                        Create Account
+                    </button>
+
+                </form>
+
+                <p class="text-center mt-3">
+                    Already have account?
+                    <a href="{% url 'login' %}" class="text-info">Login</a>
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-md-6 signup-right d-none d-md-flex">
+
+            <div>
+                <h1 class="fw-bold mb-3">Student Portal 🎓</h1>
+
+                <p class="mb-4">
+                    Manage your academic journey with ease,
+                    track performance and stay organized.
+                </p>
+
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+                     width="200" class="img-fluid">
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

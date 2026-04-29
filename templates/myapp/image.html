@@ -1,0 +1,134 @@
+{% extends 'myapp/base.html' %}
+
+{% block contentblock %}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #14234f, #f8fafc);
+    }
+
+    .upload-card {
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        padding: 30px;
+        text-align: center;
+        background: white;
+        transition: 0.3s;
+    }
+
+    .upload-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .upload-title {
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .upload-subtitle {
+        color: #06090c;
+    }
+
+    .file-box {
+        border: 2px dashed #cbd5f5;
+        border-radius: 12px;
+        padding: 30px;
+        background: #f1f5ff;
+        margin-bottom: 20px;
+    }
+
+    .file-box:hover {
+        border-color: #6366f1;
+        background: #eef2ff;
+    }
+
+    .btn-upload {
+        background: linear-gradient(135deg, #6366f1, #4f46e5);
+        color: white;
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: 500;
+    }
+
+    .btn-upload:hover {
+        background: linear-gradient(135deg, #4f46e5, #4338ca);
+    }
+
+    .tips-card {
+        border-radius: 12px;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+
+    .tips-card h6 {
+        font-weight: 600;
+    }
+
+</style>
+
+<div class="container mt-5">
+
+    <!-- TITLE -->
+    <div class="text-center mb-4">
+        <h2 class="upload-title">Student Identification</h2>
+        <p class="upload-subtitle">Upload a clear student photograph</p>
+    </div>
+
+    <!-- CARD -->
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="upload-card">
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- FILE BOX -->
+                    <div class="file-box">
+                        <p class="text-muted mb-2">📷 Preview will appear here</p>
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-upload w-100">
+                        Upload Photo
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="row mt-5 text-center">
+
+        <div class="col-md-4">
+            <div class="tips-card">
+                <h6>💡 Good Lighting</h6>
+                <p class="text-muted">Ensure face is clearly visible</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="tips-card">
+                <h6>📷 Plain Background</h6>
+                <p class="text-muted">Use a clean wall</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="tips-card">
+                <h6>🙂 Neutral Face</h6>
+                <p class="text-muted">Look straight at camera</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

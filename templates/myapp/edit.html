@@ -1,0 +1,132 @@
+{% extends 'myapp/base.html' %}
+{% load widget_tweaks %}
+
+{% block contentblock %}
+
+<style>
+    body {
+        background-color: #0f172a;
+        color: #e2e8f0;
+    }
+
+    .edit-card {
+        background: rgba(30, 41, 59, 0.85);
+        backdrop-filter: blur(10px);
+        border: 1px solid #334155;
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    }
+
+    .form-label {
+        font-size: 13px;
+        text-transform: uppercase;
+        color: #94a3b8;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .form-control {
+        background: #020617;
+        border: 1px solid #334155;
+        color: white;
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+    .form-control:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 10px rgba(37,99,235,0.4);
+        background: #020617;
+        color: white;
+    }
+
+    .btn-save {
+        background-color: #059669;
+        border: none;
+        font-weight: 600;
+        border-radius: 12px;
+    }
+
+    .btn-save:hover {
+        background-color: #047857;
+    }
+
+    .btn-back {
+        border: 1px solid #475569;
+        color: #cbd5f5;
+        border-radius: 12px;
+    }
+
+    .btn-back:hover {
+        background-color: #1e293b;
+    }
+
+    .title-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .title-icon {
+        font-size: 28px;
+        color: #2563eb;
+    }
+</style>
+
+<div class="container mt-5">
+
+    <!-- HEADER -->
+    <div class="title-box mb-4">
+        <span class="title-icon">✏️</span>
+        <h3 class="fw-bold text-white">Edit Student</h3>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="edit-card p-4">
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- ID -->
+                    <div class="mb-3">
+                        <label class="form-label">Student ID</label>
+                        {{ form.stuId|add_class:"form-control" }}
+                    </div>
+
+                    <!-- NAME -->
+                    <div class="mb-3">
+                        <label class="form-label">Student Name</label>
+                        {{ form.stuName|add_class:"form-control" }}
+                    </div>
+
+                    <!-- MARKS -->
+                    <div class="mb-4">
+                        <label class="form-label">Marks</label>
+                        {{ form.stuMarks|add_class:"form-control" }}
+                    </div>
+
+                    <!-- BUTTONS -->
+                    <div class="d-flex gap-3">
+
+                        <button type="submit" class="btn btn-save w-50">
+                            Save
+                        </button>
+
+                        <a href="{% url 'students' %}" class="btn btn-back w-50">
+                            Back
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block contentblock %}
+
+<div class="d-flex">
+
+    <!-- SIDEBAR -->
+    <div class="bg-dark text-white p-3" style="width:250px; min-height:100vh;">
+        <h4 class="text-center mb-4">🎓 Student App</h4>
+
+        <ul class="nav flex-column">
+
+            <li class="nav-item mb-2">
+                <a href="{% url 'students' %}" class="nav-link text-white">
+                    Students
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="{% url 'dashboard' %}" class="nav-link text-white">
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="{% url 'register' %}" class="nav-link text-white">
+                    Add Student
+                </a>
+            </li>
+
+        </ul>
+
+        <hr>
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-danger w-100">Logout</button>
+        </form>
+    </div>
+
+
+    <!-- MAIN -->
+    <div class="container-fluid p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-primary">Manage Students</h3>
+
+            <a href="{% url 'register' %}" class="btn btn-primary">
+                + Add Student
+            </a>
+        </div>
+
+        <!-- 🔍 LIVE SEARCH (NO BUTTON) -->
+        {% if role == 'student' %}
+        <form method="GET" id="searchForm" style="max-width: 300px;" class="mb-3">
+            <input 
+                type="text" 
+                name="q" 
+                value="{{ query }}" 
+                class="form-control form-control-sm shadow-sm"
+                placeholder="🔍 Search..."
+                onkeyup="liveSearch()">
+        </form>
+
+        <script>
+        let timer;
+
+        function liveSearch() {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                document.getElementById('searchForm').submit();
+            }, 400);
+        }
+        </script>
+        {% endif %}
+
+        <!-- TABLE -->
+        <div class="card shadow">
+            <div class="card-body">
+
+                {% if studs %}
+
+                <table class="table table-hover text-center align-middle">
+
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Student ID</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Marks</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for student in studs %}
+                        <tr>
+
+                            <td>{{ student.id }}</td>
+                            <td>{{ student.stuId }}</td>
+
+                            <td>
+                                {% if student.photo %}
+                                    <img src="{{ student.photo.url }}" width="60" class="rounded">
+                                {% else %}
+                                    No Image
+                                {% endif %}
+                            </td>
+
+                            <td>{{ student.stuName }}</td>
+                            <td>{{ student.stuMarks }}</td>
+
+                            <td>
+                                <a href="{% url 'find' student.id %}" class="btn btn-success btn-sm">View</a>
+                                <a href="{% url 'edit' student.id %}" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{% url 'delete' student.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="{% url 'image' student.id %}" class="btn btn-warning btn-sm">Upload</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+                {% else %}
+                    <p class="text-center text-warning fs-4">No Records Found</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
