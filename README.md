@@ -71,7 +71,7 @@ formsproject/
 
 ![Add Student](https://github.com/user-attachments/assets/472a0d3f-2dc1-489d-8001-a79e6c19f390)
 
-### Edit Student
+### Student Info
 
 ![Edit Student](https://github.com/user-attachments/assets/7805db75-a6e3-421a-b113-eb28c804b991)
 
