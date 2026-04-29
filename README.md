@@ -1,4 +1,5 @@
 
+
 # 🎓 Student Management System (Django)
 
 ## 📌 Overview
@@ -57,6 +58,9 @@ formsproject/
 ## 📸 Screenshots
 ### Home Page
 ![Dashboard](https://github.com/user-attachments/assets/b30fc74e-cb03-45bf-bf06-8cf30da2d382)
+
+### Home Page
+![Dashboard](https://github.com/user-attachments/assets/4046d649-e240-4cf7-ba94-f887cb87ecf0)
 
 ### Dashboard
 
