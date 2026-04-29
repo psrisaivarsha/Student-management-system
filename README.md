@@ -41,6 +41,10 @@ formsproject/
 <img width="1882" height="909" alt="Screenshot 2026-04-29 130724" src="https://github.com/user-attachments/assets/7805db75-a6e3-421a-b113-eb28c804b991" />
 <img width="1912" height="976" alt="Screenshot 2026-04-29 130705" src="https://github.com/user-attachments/assets/f94272c7-22d4-4ba8-acbc-412f5190f78a" />
 <img width="1894" height="937" alt="Screenshot 2026-04-29 130509" src="https://github.com/user-attachments/assets/6dabfcf5-162c-4234-a862-9195ab737327" />
+📌 Future Improvements
+Add REST API (Django REST Framework)
+Improve UI with Bootstrap
+Deploy project online
 👩‍💻 Author
 
 Sri Sai Varsha
