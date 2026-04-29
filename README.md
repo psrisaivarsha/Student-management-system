@@ -63,11 +63,11 @@ formsproject/
 
 ![Login](https://github.com/user-attachments/assets/9cccbce9-2e62-4aac-b561-8156bf90d4bb)
 
-### Student List
+### Delete Student
 
 ![Student List](https://github.com/user-attachments/assets/59bbca0b-4fda-4a96-b2d1-3dbcd1744cd2)
 
-### Add Student
+### Edit Student
 
 ![Add Student](https://github.com/user-attachments/assets/472a0d3f-2dc1-489d-8001-a79e6c19f390)
 
