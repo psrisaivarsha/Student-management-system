@@ -190,8 +190,7 @@ def dashboard(request):
         'top_score': top_score,
         'pass_percent': pass_percent,
     })
-
-
+# 📝 SIGNUP
 # 📝 SIGNUP
 def signup_view(request):
     error = None
@@ -199,13 +198,36 @@ def signup_view(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        role = request.POST.get('role')
+        email = request.POST.get('email')   # ✅ added
+        role = request.POST.get('role') or 'student'  # ✅ safe default
 
+        # check if user already exists
         if User.objects.filter(username=username).exists():
             error = "Username already exists"
         else:
-            user = User.objects.create_user(username=username, password=password)
-            Profile.objects.create(user=user, role=role)
+            # create user
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password
+            )
+
+            # create profile safely
+            Profile.objects.get_or_create(
+                user=user,
+                defaults={'role': role}
+            )
+
+            # ✅ SEND EMAIL
+            if email:
+                send_mail(
+                    subject="Account Created Successfully",
+                    message=f"Hi {username}, your account has been created successfully.",
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[email],
+                    fail_silently=False,   # show error if email fails
+                )
+
             return redirect('login')
 
     return render(request, 'myapp/signup.html', {'error': error})

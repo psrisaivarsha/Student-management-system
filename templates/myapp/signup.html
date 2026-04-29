@@ -7,7 +7,6 @@ body {
     color: white;
 }
 
-/* Left side */
 .signup-left {
     min-height: 100vh;
     display: flex;
@@ -15,7 +14,6 @@ body {
     justify-content: center;
 }
 
-/* Right side */
 .signup-right {
     min-height: 100vh;
     background: linear-gradient(135deg, #7c3aed, #9333ea);
@@ -26,7 +24,6 @@ body {
     padding: 40px;
 }
 
-/* Glass card */
 .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
@@ -34,7 +31,6 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Inputs */
 .form-control {
     background: rgba(255,255,255,0.08);
     border: none;
@@ -51,7 +47,6 @@ body {
     color: white;
 }
 
-/* Button */
 .btn-custom {
     background: linear-gradient(135deg, #7c3aed, #9333ea);
     border: none;
@@ -76,27 +71,28 @@ body {
                     Create your academic account
                 </p>
 
-                <!-- ERROR -->
                 {% if error %}
                 <div class="alert alert-danger text-center">
                     {{ error }}
                 </div>
                 {% endif %}
 
-                <!-- FORM -->
                 <form method="POST" action="{% url 'signup' %}">
                     {% csrf_token %}
 
+                    <!-- USERNAME -->
                     <div class="mb-3">
-                        <label>Full Name</label>
-                        <input type="text" name="username" class="form-control" placeholder="Enter name" required>
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter username" required>
                     </div>
 
+                    <!-- EMAIL -->
                     <div class="mb-3">
                         <label>Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter email">
+                        <input type="email" name="email" class="form-control" placeholder="Enter email" required>
                     </div>
 
+                    <!-- PASSWORD -->
                     <div class="mb-3">
                         <label>Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Enter password" required>
@@ -139,7 +135,6 @@ body {
 
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
                      width="200" class="img-fluid">
-
             </div>
 
         </div>
